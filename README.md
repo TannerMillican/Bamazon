@@ -15,18 +15,20 @@ If not, the user is given a thank you message and the connection to the MySQL se
 EXAMPLES:
 User initializing app:
 
-
+![](images/First%20table%20and%20question.png)
 
 User inputs for item and quantity, quantity is good:
 
-
+![](images/quantity%20prompt%20new%20table%20and%20price.png)
 
 User's quantity input is too high:
 
-
+![](images/quantity%20purchased%20too%20high.png)
 
 User making another purchase:
 
-
+![](images/making%20second%20purchase.png)
 
 User not making any more purchases:
+
+![](images/no%20more%20purchases.png)
