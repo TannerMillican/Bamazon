@@ -15,17 +15,17 @@ connection.connect(function(err) {
     afterConnection()
 });
 
+var items = [];
+var itemsInfo = [];
+var itemIDs = [];
+
 function afterConnection(){
     connection.query("SELECT * FROM products", function(err, res){
         if(err) throw err;
-        // console.log(res)
-
-        var items = [];
-        var itemsInfo = [];
-        var itemIDs = [];
 
         console.log("            Item ID        Product           Department       Price    Stock");
-        console.log("----------------------------------------------------------------------------")
+        console.log("----------------------------------------------------------------------------");
+
         
         for (var i = 0; i < res.length; i++) {
             var item = [];
@@ -45,35 +45,63 @@ function afterConnection(){
             var itemQuantity = res[i].stock_quantity;
             item.push(itemQuantity);
             itemsInfo.push(itemQuantity);
-            items.push(item)
+            items.push(item);
         }
         console.table(items)
         inquire()
-
-        function inquire(){
-            inquirer
-                .prompt([
-                    {
-                        type: "input",
-                        message: "What is the ID of the Product you would like to purchase?",
-                        name: "itemChoice"
-                    },
-                    {
-                        type: "number",
-                        message: "How many would you like to purchase?",
-                        name: "purchaseNumber"
-                    }
-                ])
-                .then(function(inquirerResponse){
-                    for (var i = 0; i < items.length; i++){
-                        if (inquirerResponse.itemChoice = items[i] && inquirerResponse.purchaseNumber < items[i].slice(4)) {
-                            // updateProduct()
-                        } else {
-                            console.log("Sorry, there's currently not that many items stocked. Please enter a lower amount.")
-                            inquire()
-                        }
-                    }
-                })
-            }
     })
 }
+
+function inquire(){
+
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                message: "What is the ID of the Product you would like to purchase?",
+                name: "itemChoice"
+            },
+            {
+                type: "input",
+                message: "How many would you like to purchase?",
+                name: "purchaseNumber"
+            }
+        ])
+        .then(function(inquirerResponse){
+
+            // console.log(inquirerResponse)
+
+            var purchaseAmount = parseInt(inquirerResponse.purchaseNumber);
+            // console.log(inquirerResponse.purchaseNumber);
+            var choice = parseInt(inquirerResponse.itemChoice);
+            console.log(choice)
+
+            // console.log(items)
+            // console.log(storeProducts)
+
+            console.log(itemIDs)
+
+            for (var i = 0; i < itemIDs.length; i++){
+                
+                if (choice === itemIDs[i]){
+                    // updateProducts()
+                    console.log("working")
+                }
+            }
+        })
+    }
+
+// function updateProducts(){
+//     console.log("One second, we're updating our inventory...\n")
+//     var query = connection.query(
+//         "UPDATE products SET ? WHERE ?",
+//         [
+//             {
+//                 stock_quantity: 
+//             },
+//             {
+//                 item_id: choice
+//             }
+//         ]
+//     )
+// }
