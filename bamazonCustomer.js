@@ -98,7 +98,7 @@ function inquire(){
                         updateProducts(newQuantityTwo, itemChosen, customerCost)
                     } else {
                         console.log("Sorry, we currently don't have that many stocked, please select another item and/or quantity.")
-                        inquirer()
+                        inquire()
                     }
                 }
             }
@@ -159,7 +159,7 @@ function readUpdatedProduct(customersCost){
             items.push(item);
         }
         console.table(items)
-        console.log("Your total price today is: " + customersCost)
+        console.log("Your total price today is: $" + customersCost)
         inquireAgain()
     })
 }
@@ -180,6 +180,7 @@ function inquireAgain() {
                 inquire()
             } else {
                 console.log("Thank you for shopping with Bamazon! Have a great day.")
+                connection.end()
             }
         })
 }
