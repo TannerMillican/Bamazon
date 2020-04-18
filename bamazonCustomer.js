@@ -76,26 +76,30 @@ function inquire(){
 
             for (var i = 0; i < itemIDsPricesAndStock.length; i++){
                 
-                if (choice === itemIDsPricesAndStock[i]  && purchaseAmount <= itemIDsPricesAndStock[i+2]){
+                if (choice === itemIDsPricesAndStock[i]){
+
+                    if (purchaseAmount <= itemIDsPricesAndStock[i+2]){
 
 
-                    var choiceQuantity = itemIDsPricesAndStock[i+2]
-                    
-                    var productPrice = itemIDsPricesAndStock[i+1]
-                    var productPriceInt = parseFloat(productPrice.substring(1))
+                        var choiceQuantity = itemIDsPricesAndStock[i+2]
+                        
+                        var productPrice = itemIDsPricesAndStock[i+1]
+                        var productPriceInt = parseFloat(productPrice.substring(1))
 
-                    var newQuantityOne = choiceQuantity - purchaseAmount;
-                    var newQuantityTwo = parseInt(newQuantityOne);
+                        var newQuantityOne = choiceQuantity - purchaseAmount;
+                        var newQuantityTwo = parseInt(newQuantityOne);
 
-                    var itemChosen = parseInt(choice);
+                        var itemChosen = parseInt(choice);
 
-                    var quantityBought = parseInt(purchaseAmount)
+                        var quantityBought = parseInt(purchaseAmount)
 
-                    var customerCost = productPriceInt * quantityBought
+                        var customerCost = productPriceInt * quantityBought
 
-                    updateProducts(newQuantityTwo, itemChosen, customerCost)
-                } else {
-                    console.log("Sorry, we currently don't have that many stocked, please select another item and/or quantity.")
+                        updateProducts(newQuantityTwo, itemChosen, customerCost)
+                    } else {
+                        console.log("Sorry, we currently don't have that many stocked, please select another item and/or quantity.")
+                        inquirer()
+                    }
                 }
             }
         })
